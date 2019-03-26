@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     public float groundCheckRadius;
     public LayerMask whatIsGround;
     private Animator anim;
+    public GameObject weapon;
+    public Transform throwPoint;
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +44,13 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(jump) && isGrounded)
         {
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+        }
+
+        if (Input.GetKeyDown(attack))
+        {
+            GameObject weaponClone = (GameObject)Instantiate(weapon, throwPoint.position, throwPoint.rotation);
+            weapon.transform.localScale = transform.localScale;
+            anim.SetTrigger("Throw");
         }
 
         if (theRB.velocity.x < 0)

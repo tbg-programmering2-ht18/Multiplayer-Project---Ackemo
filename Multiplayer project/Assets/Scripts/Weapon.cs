@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
     public float ammoSpeed;
     private Rigidbody2D theRB;
-
+    public GameObject weaponEffect;
 	// Use this for initialization
 	void Start () {
         theRB = GetComponent<Rigidbody2D>();
@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Instantiate(weaponEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }
