@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     private Animator anim;
     public GameObject weapon;
     public Transform throwPoint;
+    public float coolDown;
+    public float coolDownTimer;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +31,15 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, whatIsGround);
+        if (coolDownTimer > 0)
+        {
+            coolDownTimer -= Time.deltaTime;
+        }
+
+        if(coolDownTimer < 0)
+        {
+            coolDownTimer = 0;
+        }
 
         if (Input.GetKey(left))
         {
@@ -46,11 +57,12 @@ public class PlayerController : MonoBehaviour {
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
         }
 
-        if (Input.GetKeyDown(attack))
+        if (Input.GetKeyDown(attack) && coolDownTimer == 0)
         {
             GameObject weaponClone = (GameObject)Instantiate(weapon, throwPoint.position, throwPoint.rotation);
             weapon.transform.localScale = transform.localScale;
             anim.SetTrigger("Throw");
+            coolDownTimer = coolDown;
         }
 
         if (theRB.velocity.x < 0)

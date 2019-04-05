@@ -19,6 +19,14 @@ public class Weapon : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.tag == "Player 1")
+        {
+            FindObjectOfType<GameManager>().HurtP1();
+        }
+        if (other.tag == "Player 2")
+        {
+            FindObjectOfType<GameManager>().HurtP2();
+        }
         Instantiate(weaponEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
