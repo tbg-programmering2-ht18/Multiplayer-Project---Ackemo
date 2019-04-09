@@ -16,12 +16,10 @@ public class GameManager : MonoBehaviour {
     public GameObject[] p1Bar;
     public GameObject[] p2Bar;
 
-
     // Use this for initialization
     void Start () {
-		
+     	
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		if(P1hp <= 0)

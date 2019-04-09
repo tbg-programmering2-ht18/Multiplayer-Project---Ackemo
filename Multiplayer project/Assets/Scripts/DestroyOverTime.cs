@@ -5,8 +5,8 @@ using UnityEngine;
 public class DestroyOverTime : MonoBehaviour {
     public float lifeTime;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         
 	}
 	

@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour {
     public float coolDown;
     public float coolDownTimer;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         theRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 	}
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour {
             weapon.transform.localScale = transform.localScale;
             anim.SetTrigger("Throw");
             coolDownTimer = coolDown;
-        }
+            }
 
         if (theRB.velocity.x < 0)
         {
