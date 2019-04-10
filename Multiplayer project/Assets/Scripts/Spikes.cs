@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spikes : MonoBehaviour {
+
     
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other) // If other object collide with collider (Spikes in this case)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.tag == "Player 1")
         {
-            Destroy(other.gameObject);
+            FindObjectOfType<GameManager>().KillPlayer1();  // Runs the function KillPlayer1 from Gamemanager;
+        }
+        if (other.tag == "Player 2")
+        {
+            FindObjectOfType<GameManager>().KillPlayer2(); // Same as before but KillPlayer2
         }
     }
 }

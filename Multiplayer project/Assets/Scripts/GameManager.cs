@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
     
 	// Update is called once per frame
 	public void Update () {
-
+        // 2 simple button presses to display or hide the ScoreKeeper object
         if (Input.GetKeyDown(scorekprShow))
         {
             ScoreKeeper.SetActive(true);
@@ -32,34 +32,35 @@ public class GameManager : MonoBehaviour {
             ScoreKeeper.SetActive(false);
         }
 
+        // Simple funktion to "kill" the player if hp(Health point) is less or equal to 0
         if (P1hp <= 0)
         {
-            player1.SetActive(false);
-            p2Wins.SetActive(true);
+            player1.SetActive(false);   // The object "player1" isn't destroyed, just hidden
+            p2Wins.SetActive(true);     // Activates a screen object in the Canvas displays
 
         }
 
         if (P2hp <= 0)
         {
-            player2.SetActive(false);
-            p1Wins.SetActive(true);
+            player2.SetActive(false);   // Same structure as for player one
+            p1Wins.SetActive(true);     // Same as for p2Wins structure
         }
     }
-    public void HurtP1()
+    public void HurtP1() // These funktions are used in Weapon.cs
     {
-        P1hp -= 1;
-        for(int i = 0; i < p1Bar.Length; i++)
+        P1hp -= 1; // Takes away 1 value from decided value in unity (Can be set here aswell, just easier to work with values in unity)
+        for(int i = 0; i < p1Bar.Length; i++) // Creates an list object without specific value. Decided in unity by adding objects to list
         {
             if (P1hp > i){
 
-                p1Bar[i].SetActive(true);
+                p1Bar[i].SetActive(true);   //Activates the HPbar's hp values (light green boxes)
             }else
             {
-                p1Bar[i].SetActive(false);
+                p1Bar[i].SetActive(false);  // Each time P1 takes damage, one box deactivates
             }
         }
     }
-    public void HurtP2()
+    public void HurtP2() // Same function as above, just different names!
     {
         P2hp -= 1;
         for (int i = 0; i < p2Bar.Length; i++)
@@ -75,18 +76,26 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
-
-    public void BtnPressRestart()
+    public void KillPlayer1()
     {
-        player1.SetActive(true);
-        Vector3 player1Pos = new Vector3(-4, -10, 0);
-        player1.transform.position = player1Pos;
-        P1hp = 10;
-        player2.SetActive(true);
+        P1hp = 0;
+    }
+    public void KillPlayer2()
+    {
+        P2hp = 0;
+    }
+
+    public void BtnPressRestart() // Resets each players position and Hp value, (Known issue: Boxes don't reactivate until taken one hit damage!)
+    {
+        player1.SetActive(true);    // Reactivate player1
+        Vector3 player1Pos = new Vector3(-4, -10, 0);   // Decides player1 starting position
+        player1.transform.position = player1Pos;    // Place player1 on starting position
+        P1hp = 10;  // Sets player1 hp back to 10
+        player2.SetActive(true);    // Same as player1 
         Vector3 player2Pos = new Vector3(20, -8, 0);
         player2.transform.position = player2Pos;
         P2hp = 10;
-        p1Wins.SetActive(false);
+        p1Wins.SetActive(false);    //Deactivates victory screens
         p2Wins.SetActive(false);
 
     }
